@@ -1,0 +1,13 @@
+package com.shs.SHS.Ecommerce;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ShsEcommerceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
