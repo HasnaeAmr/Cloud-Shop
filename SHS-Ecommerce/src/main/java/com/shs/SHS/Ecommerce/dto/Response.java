@@ -20,7 +20,7 @@ public class Response {
     private String role;
     private String expirationTime;
     private long totalElement;
-    
+
     private AddressDto address;
 
     private UserDto user;
