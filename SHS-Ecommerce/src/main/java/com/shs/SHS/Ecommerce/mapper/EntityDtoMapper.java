@@ -1,8 +1,10 @@
 package com.shs.SHS.Ecommerce.mapper;
 
 import com.shs.SHS.Ecommerce.dto.AddressDto;
+import com.shs.SHS.Ecommerce.dto.CategoryDto;
 import com.shs.SHS.Ecommerce.dto.UserDto;
 import com.shs.SHS.Ecommerce.entity.Address;
+import com.shs.SHS.Ecommerce.entity.Category;
 import com.shs.SHS.Ecommerce.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +22,7 @@ public class EntityDtoMapper {
         return userDto;
     }
 
-    //Adress to DTO
+    //Address to DTO
     public AddressDto mapAddressToAddresDto(Address address) {
         AddressDto addressDto = new AddressDto();
         addressDto.setId(address.getId());
@@ -29,5 +31,13 @@ public class EntityDtoMapper {
         addressDto.setState(address.getState());
         addressDto.setZipCode(address.getZipCode());
         return addressDto;
+    }
+
+    //Category to DTO
+    public CategoryDto mapCategoryToCategoryDto(Category category) {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(category.getId());
+        categoryDto.setName(category.getName());
+        return categoryDto;
     }
 }
