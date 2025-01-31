@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 public class OrderRequest {
 
     private Double totalPrice;
-    private List<OredrItemRequest> Items;
+    //private List<OredrItemRequest> Items;
     private Payment paymentInfos;
 }
