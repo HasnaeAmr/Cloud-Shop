@@ -55,4 +55,23 @@ public class EntityDtoMapper {
         productDto.setImageUrl(product.getImageUrl());
         return productDto;
     }
+
+    public UserDto mapUserToDtoPlusAddress(User user){
+        UserDto userDto = mapUserToUserDto(user);
+        if(user.getAddress() != null){
+            AddressDto addressDto = mapAddressToAddresDto(user.getAddress());
+            userDto.setAddress(addressDto);
+        }
+        return userDto;
+    }
+
+    //orderitem to DTO plus product
+    public OrderItemDto mapOrderItemDtoPlusProduct(OrderItem orderItem){
+        OrderItemDto orderItemDto = mapOrderItemToOrderItemDto(orderItem);
+        if(orderItem.getProduct() != null){
+            ProductDto productDto = mapProductToProductDto(orderItem.getProduct());
+        }
+        return orderItemDto;
+    }
+    
 }
