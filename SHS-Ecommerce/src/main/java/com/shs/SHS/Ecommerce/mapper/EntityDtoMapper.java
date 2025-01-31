@@ -2,9 +2,11 @@ package com.shs.SHS.Ecommerce.mapper;
 
 import com.shs.SHS.Ecommerce.dto.AddressDto;
 import com.shs.SHS.Ecommerce.dto.CategoryDto;
+import com.shs.SHS.Ecommerce.dto.OrderItemDto;
 import com.shs.SHS.Ecommerce.dto.UserDto;
 import com.shs.SHS.Ecommerce.entity.Address;
 import com.shs.SHS.Ecommerce.entity.Category;
+import com.shs.SHS.Ecommerce.entity.OrderItem;
 import com.shs.SHS.Ecommerce.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -39,5 +41,13 @@ public class EntityDtoMapper {
         categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         return categoryDto;
+    }
+
+    //OrderItem to DTO
+    public OrderItemDto mapOrderItemToOrderItemDto(OrderItem orderItem) {
+        OrderItemDto orderItemDto = new OrderItemDto();
+        orderItemDto.setId(orderItem.getId());
+        orderItemDto.setQuantity(orderItem.getQuantity());
+        return orderItemDto;
     }
 }
