@@ -1,6 +1,8 @@
 package com.shs.SHS.Ecommerce.mapper;
 
+import com.shs.SHS.Ecommerce.dto.AddressDto;
 import com.shs.SHS.Ecommerce.dto.UserDto;
+import com.shs.SHS.Ecommerce.entity.Address;
 import com.shs.SHS.Ecommerce.entity.User;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +18,16 @@ public class EntityDtoMapper {
         userDto.setRole(user.getRole().name());
         userDto.setName(user.getName());
         return userDto;
+    }
+
+    //Adress to DTO
+    public AddressDto mapAddressToAddresDto(Address address) {
+        AddressDto addressDto = new AddressDto();
+        addressDto.setId(address.getId());
+        addressDto.setStreet(address.getStreet());
+        addressDto.setCity(address.getCity());
+        addressDto.setState(address.getState());
+        addressDto.setZipCode(address.getZipCode());
+        return addressDto;
     }
 }
