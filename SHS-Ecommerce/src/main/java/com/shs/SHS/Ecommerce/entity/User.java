@@ -1,5 +1,6 @@
 package com.shs.SHS.Ecommerce.entity;
 
+import com.shs.SHS.Ecommerce.dto.OrderItemDto;
 import com.shs.SHS.Ecommerce.enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,9 @@ public class User {
     private String phoneNumber;
 
     private UserRole role;
+
+    @OneToMany(mappedBy = "user")
+    private List<OrderItem> orderItemList;
 
     @OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
