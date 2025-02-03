@@ -4,6 +4,7 @@ import com.shs.SHS.Ecommerce.entity.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.function.Function;
 
 @Service
 @Slf4j
@@ -37,5 +39,13 @@ public class JwtUtils {
         return Jwts.builder().subject(username).issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_IN_MILLISEC))
                 .signWith(secretKey).compact();
+    }
+
+    public String getUsernameFromToken(String token){
+        return extractClaims(token, Claims::getSubject);
+    }
+    private <T> T extractClaims(String token , Function<Claims,T> claimsResolver){
+        return claimsTFunction.apply(Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload());
+
     }
 }
