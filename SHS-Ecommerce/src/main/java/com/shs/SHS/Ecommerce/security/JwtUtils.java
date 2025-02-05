@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -44,8 +45,21 @@ public class JwtUtils {
     public String getUsernameFromToken(String token){
         return extractClaims(token, Claims::getSubject);
     }
-    private <T> T extractClaims(String token , Function<Claims,T> claimsResolver){
-        return claimsTFunction.apply(Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload());
 
+    private <T> T extractClaims(String token , Function<Claims,T> claimsTFunction){
+        return claimsTFunction.apply(Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload());
+    }
+
+    private boolean isTokenValid(String token){
+        return extractClaims(token, Claims::getExpiration).before(new Date());
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails){
+        final String username = getUsernameFromToken(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private boolean isTokenExpired(String token){
+        return extractClaims(token, Claims::getIssuedAt).before(new Date());
     }
 }
